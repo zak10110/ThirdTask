@@ -4,10 +4,13 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         //1
-        System.out.println("Enter Date in format(XXXX-XX-XX):");
-        Scanner in=new Scanner(System.in);
-        String date=in.next();
-        dateComparison(date);
+//        System.out.println("Enter Date in format(XXXX-XX-XX):");
+//        Scanner in=new Scanner(System.in);
+//        String date=in.next();
+//        dateComparison(date);
+
+        //2
+        piNumberOutput();
 
     }
 
@@ -33,7 +36,20 @@ public class Main {
                 System.out.println(todayDate.getDayOfMonth()+" != "+dateToCompair.getDayOfMonth());
             }
         }
+    }
 
+//    2. Выведите на экран 10 строк со значением числа Пи. Причем в первой
+//    строке должно быть 2 знака после запятой, во второй 3, в третьей 4 и т.д.
+
+    public  static void  piNumberOutput(){
+        double pi=Math.PI;
+        int num=3;
+        String formattedDouble = String.format("%.2f", pi);
+        for (int i=0;i<10;i++){
+            System.out.println(formattedDouble);
+            formattedDouble = String.format("%."+num+"f", pi);
+            num++;
+        }
     }
 
 }
