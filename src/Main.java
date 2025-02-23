@@ -1,5 +1,7 @@
 import java.time.LocalDate;
-import java.util.Scanner;
+import java.util.*;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
@@ -10,7 +12,10 @@ public class Main {
 //        dateComparison(date);
 
         //2
-        piNumberOutput();
+        //piNumberOutput();
+
+        //3
+        getLettersCount();
 
     }
 
@@ -51,5 +56,42 @@ public class Main {
             num++;
         }
     }
+
+    //3. Считайте из текстового файла текст на английском языке и
+    //выведите статистику по частоте использования букв в тексте
+    //(т. е. буква — количество использований), причем первыми
+    //должны выводиться буквы используемы чаще всего.
+    public static void getLettersCount(){
+        Map<String, Integer> dictionary = new HashMap<>();
+        LinkedList<String> letters=new LinkedList<String>();
+        try (FileReader fr = new FileReader("src/Text.txt")) {
+            int data;
+            while ((data = fr.read()) != -1) {
+                letters.add(String.valueOf((char)data));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for (String item:letters){
+            if(!item.contains(" ")){
+                if(!dictionary.containsKey(item)){
+                    dictionary.put(item,1);
+                }
+                else{
+                    dictionary.put(item,dictionary.get(item)+1);
+                }
+                System.out.println(item);
+            }
+
+        }
+        List<Map.Entry<String, Integer>> list = new ArrayList<>(dictionary.entrySet());
+        list.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
+        for (Map.Entry<String,Integer> item:list){
+            System.out.println(item.getKey()+" : "+item.getValue());
+        }
+
+    }
+
+
 
 }
